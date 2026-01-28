@@ -9,10 +9,7 @@ function [transmitted, reflected] = RCWA_simple(wavelength, texture, profile, va
                       % light for incident TE light on bottom of substrate
 
 %% parse optional input parameters
-
 % defaults
-plot_textures = false;
-plot_fields = false;
 delta = 90;
 theta = 0;
 fourier_modes = [6, 6];
@@ -20,12 +17,6 @@ period = [1, 1];
 i = 1;
 while i < numel(varargin)
     switch varargin{i}
-        case 'plot_textures'
-            plot_textures = true;
-            i = i+1;
-        case 'plot_fields'
-            plot_fields = true;
-            i = i+1;
         case 'delta'
             delta = varargin{i+1};
             i = i+2;
@@ -34,6 +25,9 @@ while i < numel(varargin)
             i = i+2;
         case 'fourier_modes'
             fourier_modes = varargin{i+1};
+            if isscalar(fourier_modes)
+                fourier_modes = [fourier_modes, fourier_modes];
+            end
             i = i+2;
         case 'period'
             period = varargin{i+1};
@@ -56,12 +50,6 @@ parm.sym.y = 0;     %y-direction mirror symmetry plane
 parm.sym.pol = 1;   %polarization, TE = 1, TM = -1
 
 retio({},inf*1i);
-if plot_textures
-    parm.res1.trace = 1; %Sets option to plot textures when running res1
-end
-if plot_fields
-    parm.res1.champ = 1; %Improves calculation of EM fields
-end
 
 %% Define Profile and Run RCWA solver
 
