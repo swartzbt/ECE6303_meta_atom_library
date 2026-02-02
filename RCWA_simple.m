@@ -1,8 +1,15 @@
 function [transmitted, reflected] = RCWA_simple(wavelength, texture, profile, varargin)
 %Calculate complex amplitude of normally incident transmitted light through square array of pillars
 % --- INPUTS ---
-% --- All geometric inputs are normalized by wavelength ---
-% wavelength       - wavelength of incident light
+% wavelength      - wavelength of incident light (scalar)
+% texture         - texture cell array. See RETICOLO documentation (cell)
+% profile         - profile cell array. See RETICOLO documentation (cell)
+%
+% --- OPTIONAL NAME-VALUE PAIRS ---
+% delta           - azimuthal angle of incidence in degrees (scalar, default: 90)
+% theta           - polar angle of incidence in degress (scalar, default: 0)
+% fourier_modes   - number of Fourier modes in each direction (vector, default: [6, 6])
+% period          - period of the array in each direction (vector, default: [1, 1])
 
 % --- OUTPUTS ---
 % transmitted       - Complex relative amplitude of 0 order transmitted TE
@@ -51,7 +58,7 @@ parm.sym.pol = 1;   %polarization, TE = 1, TM = -1
 
 retio({},inf*1i);
 
-%% Define Profile and Run RCWA solver
+%% Run RCWA solver
 
 k_par = sind(theta);
 

@@ -3,7 +3,6 @@ function [texture, profile] = square(n_substrate, n_pillar, n_background, height
     %   By default, outputs for square pillars.
     %   To output circles instead of squares, add optional argument 'round'
     %   To output holes instead of pillars, add optional argument 'holes'
-
     [num_steps, holes] = parse_varargin(varargin);
 
     texture = cell(1,3);

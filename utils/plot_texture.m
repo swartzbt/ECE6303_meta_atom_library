@@ -51,4 +51,7 @@ function plot_texture(texture, profile, period)
     end
 
     view(30, 30)
+
+    axis image
+    xlabel('μm')
 end
